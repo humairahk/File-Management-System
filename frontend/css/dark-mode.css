@@ -1,0 +1,272 @@
+/* Dark Mode Styles */
+body {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #e2e8f0;
+}
+
+.auth-page {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.logo-text {
+    color: #f1f5f9;
+}
+
+.logo-tagline {
+    color: rgba(241, 245, 249, 0.8);
+}
+
+.theme-toggle {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+    color: #f1f5f9;
+}
+
+.theme-toggle:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.hero-text h2 {
+    color: #f1f5f9;
+}
+
+.hero-text p {
+    color: rgba(241, 245, 249, 0.8);
+}
+
+.feature {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.feature:hover {
+    background: rgba(30, 41, 59, 0.7);
+}
+
+.feature h4 {
+    color: #f1f5f9;
+}
+
+.feature p {
+    color: rgba(241, 245, 249, 0.7);
+}
+
+.hero-auth {
+    background: #1e293b;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.auth-card h3 {
+    color: #f1f5f9;
+}
+
+.auth-card > p {
+    color: #94a3b8;
+}
+
+.role-btn {
+    background: #334155;
+    border-color: #475569;
+}
+
+.role-btn i {
+    color: #94a3b8;
+}
+
+.role-btn span {
+    color: #cbd5e1;
+}
+
+.role-btn.active {
+    background: linear-gradient(135deg, #4f46e530 0%, #7c3aed30 100%);
+    border-color: #4f46e5;
+}
+
+.role-btn.active i,
+.role-btn.active span {
+    color: #818cf8;
+}
+
+.demo-info {
+    border-color: #475569;
+}
+
+.demo-cred {
+    background: #334155;
+    color: #94a3b8;
+}
+
+.demo-cred strong {
+    color: #818cf8;
+}
+
+.footer {
+    border-color: rgba(255,255,255,0.1);
+    color: rgba(241, 245, 249, 0.7);
+}
+
+.footer-links a {
+    color: rgba(241, 245, 249, 0.7);
+}
+
+.footer-links a:hover {
+    color: #f1f5f9;
+}
+
+.back-home {
+    color: #f1f5f9;
+}
+
+.auth-logo {
+    color: #f1f5f9;
+}
+
+.auth-card {
+    background: #1e293b;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.auth-tabs {
+    border-color: #475569;
+}
+
+.auth-tab {
+    color: #94a3b8;
+}
+
+.auth-tab.active {
+    color: #818cf8;
+}
+
+.role-option {
+    background: #334155;
+    border-color: #475569;
+}
+
+.role-option i {
+    color: #94a3b8;
+}
+
+.role-option span {
+    color: #cbd5e1;
+}
+
+.role-option.active {
+    background: linear-gradient(135deg, #4f46e530 0%, #7c3aed30 100%);
+    border-color: #4f46e5;
+}
+
+.role-option.active i,
+.role-option.active span {
+    color: #818cf8;
+}
+
+.form-group label {
+    color: #e2e8f0;
+}
+
+.form-group label i {
+    color: #94a3b8;
+}
+
+.form-group input,
+.form-group select {
+    background: #334155;
+    border-color: #475569;
+    color: #f1f5f9;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.form-group input::placeholder {
+    color: #64748b;
+}
+
+.password-toggle {
+    color: #94a3b8;
+}
+
+.checkbox span {
+    color: #cbd5e1;
+}
+
+.forgot-link {
+    color: #818cf8;
+}
+
+.form-steps::before {
+    background: #475569;
+}
+
+.step-number {
+    background: #475569;
+    color: #94a3b8;
+}
+
+.step.active .step-number {
+    background: #4f46e5;
+    color: white;
+}
+
+.step-text {
+    color: #94a3b8;
+}
+
+.step.active .step-text {
+    color: #818cf8;
+}
+
+.form-hint {
+    color: #94a3b8;
+}
+
+.demo-credentials {
+    border-color: #475569;
+}
+
+.demo-credentials h4 {
+    color: #cbd5e1;
+}
+
+.demo-item {
+    background: #334155;
+    color: #94a3b8;
+}
+
+.demo-item strong {
+    color: #818cf8;
+}
+
+.back-link {
+    color: #818cf8;
+}
+
+.auth-footer {
+    border-color: #475569;
+}
+
+.auth-footer p {
+    color: #94a3b8;
+}
+
+.auth-footer a {
+    color: #818cf8;
+}
+
+.security-note {
+    color: #10b981;
+}
+
+/* Button adjustments for dark mode */
+.btn-secondary {
+    background: #475569;
+    color: #e2e8f0;
+}
+
+.btn-secondary:hover {
+    background: #4b5563;
+}

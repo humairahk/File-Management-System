@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Logs | FileOrganiser</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-mode.css" id="dark-mode-style" disabled>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .audit-container {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .audit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .audit-header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .audit-header h1 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .audit-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4f46e5;
+            font-size: 1.8rem;
+        }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .audit-filters {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9rem;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .audit-table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .audit-table th {
+            background: #f8fafc;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .audit-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .audit-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .action-badge {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .chart {
+            height: 300px;
+            position: relative;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 1200px) {
+            .audit-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .audit-stats {
+                grid-template-columns: 1fr;
+            }
+            .audit-filters {
+                grid-template-columns: 1fr;
+            }
+            .audit-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="audit-container">
+        <div class="audit-header">
+            <div class="audit-header-left">
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1>Audit Logs</h1>
+            </div>
+            <div class="export-buttons">
+                <button class="btn btn-secondary" id="exportCSVBtn">
+                    <i class="fas fa-file-csv"></i>
+                    Export CSV
+                </button>
+                <button class="btn btn-secondary" id="exportJSONBtn">
+                    <i class="fas fa-file-code"></i>
+                    Export JSON
+                </button>
+            </div>
+        </div>
+        
+        <!-- Audit Stats -->
+        <div class="audit-stats" id="auditStats">
+            <!-- Stats will be loaded dynamically -->
+        </div>
+        
+        <!-- Filters -->
+        <div class="audit-filters">
+            <div class="filter-group">
+                <label><i class="fas fa-calendar"></i> Start Date</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-calendar"></i> End Date</label>
+                <input type="date" id="endDate">
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-tag"></i> Action</label>
+                <select id="actionFilter">
+                    <option value="">All Actions</option>
+                    <option value="Login">Login</option>
+                    <option value="Logout">Logout</option>
+                    <option value="Upload">Upload</option>
+                    <option value="Download">Download</option>
+                    <option value="View">View</option>
+                    <option value="Delete">Delete</option>
+                    <option value="Password Reset">Password Reset</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-search"></i> Search</label>
+                <input type="text" id="searchInput" placeholder="User, File, IP...">
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-primary" id="applyFiltersBtn">
+                    <i class="fas fa-filter"></i>
+                    Apply Filters
+                </button>
+                <button class="btn btn-secondary" id="clearFiltersBtn">
+                    <i class="fas fa-times"></i>
+                    Clear
+                </button>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="chart-container">
+            <h3 style="margin-bottom: 20px; color: #1e293b;">
+                <i class="fas fa-chart-line"></i> Activity Overview
+            </h3>
+            <div class="chart-grid">
+                <div class="chart">
+                    <canvas id="actionsChart"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Audit Logs Table -->
+        <div class="audit-table-container">
+            <table class="audit-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                        <th>File/ID</th>
+                        <th>IP Address</th>
+                        <th>Device</th>
+                        <th>Result</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="auditLogsBody">
+                    <!-- Audit logs will be loaded dynamically -->
+                </tbody>
+            </table>
+            
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-clipboard-list"></i>
+                <p>No audit logs found</p>
+                <p class="empty-subtext">Try adjusting your filters</p>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="btn btn-secondary" id="prevPage">
+                <i class="fas fa-chevron-left"></i>
+                Previous
+            </button>
+            <span id="pageInfo">Page 1 of 1</span>
+            <button class="btn btn-secondary" id="nextPage">
+                Next
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/audit.js"></script>
+</body>
+</html>

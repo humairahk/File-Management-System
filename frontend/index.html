@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileOrganiser | Secure File Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-mode.css" id="dark-mode-style" disabled>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <i class="fas fa-folder-tree logo-icon"></i>
+                <h1 class="logo-text">FileOrganiser</h1>
+                <span class="logo-tagline">Secure Document Management System</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+        
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="hero-text">
+                    <h2>Efficient, Secure, Organized</h2>
+                    <p>Streamline your document management with our professional file tracking system. Built for corporate environments with enterprise-grade security.</p>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Secure Access</h4>
+                            <p>Role-based authentication with audit trails</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tags"></i>
+                            <h4>Smart Categorization</h4>
+                            <p>Automatic file numbering and organization</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-search"></i>
+                            <h4>Quick Retrieval</h4>
+                            <p>Fast search and preview capabilities</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Audit Logs</h4>
+                            <p>Comprehensive tracking and reporting</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-auth">
+                    <div class="auth-card">
+                        <h3>Get Started</h3>
+                        <p>Sign in to access the file management system</p>
+                        <div class="role-selection">
+                            <button class="role-btn active" data-role="admin">
+                                <i class="fas fa-user-cog"></i>
+                                <span>Administrator</span>
+                            </button>
+                            <button class="role-btn" data-role="reader">
+                                <i class="fas fa-user"></i>
+                                <span>Reader</span>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary btn-block" id="loginBtn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Continue to Login
+                        </button>
+                        <div class="demo-info">
+                            <h4>Demo Credentials</h4>
+                            <div class="demo-cred">
+                                <strong>Admin:</strong> admin@company.com / Admin@123
+                            </div>
+                            <div class="demo-cred">
+                                <strong>Reader:</strong> reader@company.com / Reader@123
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2024 FileOrganiser. All rights reserved. | Designed for Corporate Use</p>
+            <p class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> Security</a>
+                <a href="#"><i class="fas fa-file-contract"></i> Privacy</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/util.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const darkModeStyle = document.getElementById('dark-mode-style');
+            const loginBtn = document.getElementById('loginBtn');
+            const roleBtns = document.querySelectorAll('.role-btn');
+            let selectedRole = 'admin';
+            
+            // Theme toggle
+            themeToggle.addEventListener('click', function() {
+                const isDark = darkModeStyle.disabled;
+                darkModeStyle.disabled = !isDark;
+                themeToggle.innerHTML = isDark ? 
+                    '<i class="fas fa-sun"></i>' : 
+                    '<i class="fas fa-moon"></i>';
+                localStorage.setItem('darkMode', isDark);
+            });
+            
+            // Restore theme preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                darkModeStyle.disabled = false;
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            // Role selection
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedRole = this.dataset.role;
+                });
+            });
+            
+            // Login button
+            loginBtn.addEventListener('click', function() {
+                localStorage.setItem('selectedRole', selectedRole);
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
